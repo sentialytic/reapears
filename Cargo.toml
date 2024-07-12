@@ -1,0 +1,123 @@
+[package]
+name = "reapears"
+version = "0.0.1"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+dev = ["console-subscriber", "color-eyre"]
+
+[dependencies]
+tokio = { version = "1", features = [
+    "rt-multi-thread",
+    "fs",
+    "time",
+    "net",
+    "io-util",
+    "sync",
+    "signal",
+    "macros",
+    "tracing",
+] }
+axum = { version = "0.7", features = [
+    "multipart",
+    "ws",
+    "tracing",
+    "macros",
+] }
+headers = "0.4.0"
+axum-extra = { version = "0.9.2", features = [
+    "cookie-private",
+    "query",
+    "typed-header",
+] }
+tower = { version = "0.4.13", features = [
+    "buffer",
+    "limit",
+    "load-shed",
+    "timeout",
+    "util",
+] }
+tower-http = { version = "0.5", features = [
+    "catch-panic",
+    "cors",
+    "fs",
+    "limit",
+    "normalize-path",
+    "propagate-header",
+    "request-id",
+    "sensitive-headers",
+    "set-header",
+    "timeout",
+    "trace",
+    "util",
+] }
+bytes = "1.5"
+futures-util = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# 
+sqlx = { version = "0.7.3", default-features = false, features = [
+    "tls-rustls",
+    "runtime-tokio",
+    "postgres",
+    "migrate",
+    "macros",
+    "time",
+    "json",
+    "uuid",
+    "rust_decimal",
+] }
+lettre = { version = "0.11", default-features = false, features = [
+    "builder",
+    "hostname",
+    "smtp-transport",
+    "pool",
+    "hostname",
+    "tokio1-rustls-tls",
+] }
+minijinja = "1"
+image = { version = "0.24", features = ["webp-encoder"] }
+
+# 
+password-auth = "1.0.0"
+blake3 = "1.5.0"
+rand = "0.8.5"
+
+# 
+itertools = "0.12"
+geo = { version = "0.27.0", features = ["use-serde"] }
+uuid = { version = "1.7", features = ["v7", "fast-rng", "serde"] }
+time = { version = "0.3.34", features = ["serde-human-readable"] }
+phonenumber = "0.3.3"
+rust_decimal = "1.33.1"
+
+# 
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter", "json"] }
+# opentelemetry = "0.19.0"
+# tracing-opentelemetry = "0.19.0"
+# opentelemetry-jaeger = "0.18.0"
+console-subscriber = { version = "0.2.0", optional = true }
+color-eyre = { version = "0.6.2", optional = true }
+
+# 
+clap = { version = "4", features = ["derive"] }
+dotenvy = "0.15.7"
+
+
+# [dev-dependencies]
+# insta = "1.31.0"
+
+
+# Profiles Sections
+
+#[profile.release]
+#lto = true
+#codegen-units = 1
+#opt-level = 3
+
+[profile.dev.package.sqlx-macros]
+opt-level = 3
